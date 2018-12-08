@@ -1,0 +1,35 @@
+#Inserts a new key with a value
+#Input:
+#       key : string
+#       value : string or numeric so far
+#       type : string ('STR' / 'NUM')
+def set(key, value, type):
+    pass
+
+
+#Returns the value of a key
+#Input:
+#       key : string
+def get(key):
+    pass
+
+
+#Deletes a key
+#Input:
+#       key : string
+def delete(key):
+    pass
+
+
+#Increments a key with numeric value
+#Input:
+#       key : string
+def increment(key):
+    pass
+
+
+#Decrements a key with numeric value
+#Input:
+#       key : string
+def decrement(key):
+    pass
