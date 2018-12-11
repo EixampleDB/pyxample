@@ -1,4 +1,4 @@
-import pyxample.view.pyxample as pyx
+import pyxample as pyx
 
 pyx.set("test", "testval1") #Insertamos string
 print(pyx.get("test"))

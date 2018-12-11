@@ -7,21 +7,21 @@ from pyxample import controller
 #       value : string or numeric so far
 def set(key, value):
     header = {}
-    if isinstance(value, int) or isinstance(value, float) or isinstance(value,long):
+    if isinstance(value, int) or isinstance(value, float):
         header['type'] = 'NUM'
     elif isinstance(value, str):
         header['type'] = "STR"
     else:
         header['type'] = "STR"
 
-    controller.send_request("POST", key, headers, str(value))
+    controller.send_request("POST", key, header, str(value))
 
 
 #Returns the value of a key
 #Input:
 #       key : string
 def get(key):
-    controller.send_request("GET", key)
+    return controller.send_request("GET", key)
 
 
 #Deletes a key
