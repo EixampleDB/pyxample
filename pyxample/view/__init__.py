@@ -1,0 +1,1 @@
+from pyxample.view import pyxample
