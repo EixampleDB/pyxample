@@ -1,10 +1,18 @@
+from pyxample import controller
+
+
 #Inserts a new key with a value
 #Input:
 #       key : string
 #       value : string or numeric so far
-#       type : string ('STR' / 'NUM')
-def set(key, value, type):
-    pass
+def set(key, value):
+    headers = {}
+    if isinstance(value, str):
+        headers['type'] = "STR"
+    else:
+        headers['type'] = "NUM"
+
+    controller.send_request("POST", key, headers, str(value))
 
 
 #Returns the value of a key
