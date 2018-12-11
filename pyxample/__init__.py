@@ -1,1 +1,1 @@
-from .view import pyxample
+from .view.pyxample import *
