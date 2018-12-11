@@ -6,11 +6,13 @@ from pyxample import controller
 #       key : string
 #       value : string or numeric so far
 def set(key, value):
-    headers = {}
-    if isinstance(value, str):
-        headers['type'] = "STR"
+    header = {}
+    if isinstance(value, int) or isinstance(value, float) or isinstance(value,long):
+        header['type'] = 'NUM'
+    elif isinstance(value, str):
+        header['type'] = "STR"
     else:
-        headers['type'] = "NUM"
+        header['type'] = "STR"
 
     controller.send_request("POST", key, headers, str(value))
 
@@ -19,25 +21,27 @@ def set(key, value):
 #Input:
 #       key : string
 def get(key):
-    pass
+    controller.send_request("GET", key)
 
 
 #Deletes a key
 #Input:
 #       key : string
 def delete(key):
-    pass
+    controller.send_request("DELETE", key)
 
 
 #Increments a key with numeric value
 #Input:
 #       key : string
 def increment(key):
-    pass
+    header = {'op' : 'INCR'}
+    controller.send_request("PUT", key, header)
 
 
 #Decrements a key with numeric value
 #Input:
 #       key : string
 def decrement(key):
-    pass
+    header = {'op' : 'DECR'}
+    controller.send_request("PUT", key, header)
