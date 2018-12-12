@@ -21,7 +21,7 @@ def set(key, value):
 #Input:
 #       key : string
 def get(key):
-    return controller.send_request("GET", key)
+    return controller.send_request("GET", key).decode("utf-8")
 
 
 #Deletes a key
