@@ -7,6 +7,10 @@ class Request:
         self.header = header
         self.body = body
         self.url = url
+        if body:
+            self.header['Content-Length'] = len(self.body.encode('utf-8'))
+        else:
+            self.header['Content-Length'] = 0
 
     def send(self):
         conn = http.client.HTTPConnection("localhost", 5333)

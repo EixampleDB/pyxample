@@ -1,6 +1,5 @@
 from pyxample import controller
 
-
 #Inserts a new key with a value
 #Input:
 #       key : string
@@ -45,3 +44,23 @@ def increment(key):
 def decrement(key):
     header = {'op' : 'DECR'}
     controller.send_request("PUT", key, header)
+
+
+#Returns id of a bulk operation
+#Input:
+#       operations : list of dicts with form:
+#           {
+# 			    "key":"NUMERIC",
+# 			    "type":"SET",
+# 			    "value":"1",
+# 			    "parameters":["NUM"]
+# 		    }
+def bulk(operations):
+    return controller.send_bulk_request(operations).decode("utf-8")
+
+
+#Returns the description of a bulk operation (all the steps) by a given id
+#Input:
+#       id : string
+def get_bulk_op(id):
+    return controller.send_request("GET", "bulk/"+id).decode("utf-8")
