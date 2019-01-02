@@ -4,6 +4,10 @@ import json
 valid_methods = ["PUT", "POST", "GET", "DELETE"]
 
 
+def connect(ip="localhost", port=5333):
+    set_server(ip, port)
+
+
 def send_request(method, key, headers={}, body=None):
     if method not in valid_methods:
         raise Exception

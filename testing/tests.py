@@ -1,5 +1,5 @@
 import pyxample as pyx
-
+pyx.connect("localhost", 5333)
 pyx.set("test", "testval1")  # Insertamos string
 print(pyx.get("test"))
 
