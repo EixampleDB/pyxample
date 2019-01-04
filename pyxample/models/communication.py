@@ -29,8 +29,6 @@ class Request:
         res = conn.getresponse()
         body = res.read().decode('utf-8')
         conn.close()
-        #print('hola')
-        #print(body)
         headers = res.getheaders()
         code = res.getcode()
         reason = res.reason
