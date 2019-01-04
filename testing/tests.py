@@ -1,14 +1,21 @@
 import pyxample as pyx
 pyx.connect("localhost", 5333)
-pyx.set("test", "testval1")  # Insertamos string
-print(pyx.get("test"))
+response = pyx.set("test", "testval1")  # Insertamos string
+print(response, '\n')
+response = pyx.get("test")
+print(response, '\n')
 
 pyx.set("testNum", 23)  # Insertamos numero
-print(pyx.get("testNum"))
+response = pyx.get("testNum")
+print(response, '\n')
+
 pyx.increment("testNum")  # Incrementamos el valor
-print(pyx.get("testNum"))
+response = pyx.get("testNum")
+print(response, '\n')
+
 pyx.decrement("testNum")  # Decrementamos el valor
-print(pyx.get("testNum"))
+response = pyx.get("testNum")
+print(response, '\n')
 
 # BULK
 operations = [
@@ -29,7 +36,7 @@ for i in range(100):
 
     })
 
-id = pyx.bulk(operations)
-print(id)
-print(pyx.get("NUMERIC"))
-print(pyx.get_bulk_op(id))
+id = pyx.bulk(operations).body
+print('bulk id: ',id)
+print('final value: ', pyx.get("NUMERIC").body)
+print('body bulk operation: ',pyx.get_bulk_op(id).body)

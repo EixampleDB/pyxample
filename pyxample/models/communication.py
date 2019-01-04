@@ -26,10 +26,25 @@ class Request:
     def send(self):
         conn = http.client.HTTPConnection(IP, PORT)
         conn.request(self.method, self.url, self.body, self.header)
-        response = conn.getresponse().read()
+        res = conn.getresponse()
+        body = res.read().decode('utf-8')
         conn.close()
+        #print('hola')
+        #print(body)
+        headers = res.getheaders()
+        code = res.getcode()
+        reason = res.reason
+        response = Response(headers, body, code)
+
         return response
 
 
 class Response:
-    pass
+    def __init__(self, header={}, body=None, code=None):
+        self.header = header
+        self.body = body
+        self.code = code
+
+    def __str__(self):
+        string = 'Header: '+str(self.header)+'\nBody: '+str(self.body)+' \nCode: '+str(self.code)
+        return string

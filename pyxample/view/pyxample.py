@@ -22,21 +22,21 @@ def set(key, value):
     else:
         header['type'] = "STR"
 
-    controller.send_request("POST", key, header, str(value))
+    return controller.send_request("POST", key, header, str(value))
 
 
 # Returns the value of a key
 # Input:
 #       key : string
 def get(key):
-    return controller.send_request("GET", key).decode("utf-8")
+    return controller.send_request("GET", key)
 
 
 # Deletes a key
 # Input:
 #       key : string
 def delete(key):
-    controller.send_request("DELETE", key)
+    return controller.send_request("DELETE", key)
 
 
 # Increments a key with numeric value
@@ -44,7 +44,7 @@ def delete(key):
 #       key : string
 def increment(key):
     header = {'op': 'INCR'}
-    controller.send_request("PUT", key, header)
+    return controller.send_request("PUT", key, header)
 
 
 # Decrements a key with numeric value
@@ -52,7 +52,7 @@ def increment(key):
 #       key : string
 def decrement(key):
     header = {'op': 'DECR'}
-    controller.send_request("PUT", key, header)
+    return controller.send_request("PUT", key, header)
 
 
 # Returns id of a bulk operation
@@ -64,12 +64,19 @@ def decrement(key):
 # 			    "value":"1",
 # 			    "parameters":["NUM"]
 # 		    }
+# "key": name of the key
+# "type": operation
+# "value": value
+# "parameters": list of parameters
+#  -- "NUM": key with numerical value
+#  -- "STR": key with string value
+#
 def bulk(operations):
-    return controller.send_bulk_request(operations).decode("utf-8")
+    return controller.send_bulk_request(operations)
 
 
 # Returns the description of a bulk operation (all the steps) by a given id
 # Input:
 #       id : string
 def get_bulk_op(id):
-    return controller.send_request("GET", "bulk/" + id).decode("utf-8")
+    return controller.send_request("GET", "bulk/" + id)
