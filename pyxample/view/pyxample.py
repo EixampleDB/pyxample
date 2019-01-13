@@ -1,5 +1,6 @@
 from pyxample import controller
 
+keyTypes = ['DEF', 'STARTS', 'REGEX']
 
 # Changes the ip of the DB if necessary
 # Input:
@@ -13,7 +14,7 @@ def connect(ip="localhost", port=5333):
 # Input:
 #       key : string
 #       value : string or numeric so far
-def set(key, value):
+def set(key, value, keyType='DEF'):
     header = {}
     if isinstance(value, int) or isinstance(value, float):
         header['type'] = 'NUM'
@@ -21,37 +22,50 @@ def set(key, value):
         header['type'] = "STR"
     else:
         header['type'] = "STR"
-
+    if keyType in keyTypes:
+        header['search'] = keyType
     return controller.send_request("POST", key, header, str(value))
 
 
 # Returns the value of a key
 # Input:
 #       key : string
-def get(key):
+def get(key, keyType='DEF'):
+    header = {}
+    if keyType in keyTypes:
+        header['search'] = keyType
     return controller.send_request("GET", key)
 
 
 # Deletes a key
 # Input:
 #       key : string
-def delete(key):
+def delete(key, keyType='DEF'):
+    header = {}
+    if keyType in keyTypes:
+        header['search'] = keyType
     return controller.send_request("DELETE", key)
 
 
 # Increments a key with numeric value
 # Input:
 #       key : string
-def increment(key):
-    header = {'op': 'INCR'}
+def increment(key, keyType='DEF'):
+    header = {}
+    header['op'] = 'INCR'
+    if keyType in keyTypes:
+        header['search'] = keyType
     return controller.send_request("PUT", key, header)
 
 
 # Decrements a key with numeric value
 # Input:
 #       key : string
-def decrement(key):
-    header = {'op': 'DECR'}
+def decrement(key, keyType='DEF'):
+    header = {}
+    header['op'] = 'DECR'
+    if keyType in keyTypes:
+        header['search'] = keyType
     return controller.send_request("PUT", key, header)
 
 
