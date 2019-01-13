@@ -24,7 +24,6 @@ print(response, '\n')
 
 #3. TEST PATHMATCHING
 
-response = pyx.set("/apath11", "testval1")
 response = pyx.set("/aaabpath1", 0) # 0-1-0-1
 response = pyx.set("/aaaapath11", 0) # 0-1-2-3
 response = pyx.set("/bpath11", 3) # 3-4
